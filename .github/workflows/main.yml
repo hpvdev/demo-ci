@@ -35,9 +35,11 @@ jobs:
       - name: Build Android Release
         run: |
           cd android && ./gradlew assembleRelease
-      # Upload to Artifact
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+      #Upload to Deploygate
+      - name: This action uploads an application file to DeployGate
+        uses: jmatsu/dg-upload-app-action@v0.2.0
         with:
-          name: app-release.apk
-          path: android/app/build/outputs/apk/release/
+          app_owner_name: hungpv19
+          api_token: 191bec14-af7b-4144-b60e-4a4ea7e93825
+          app_file_path: android/app/build/outputs/apk/release/app-release.apk
+
