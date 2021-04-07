@@ -39,6 +39,5 @@ jobs:
         run:  gem install fastlane
       - name: Build Apk
         run: |
-          cd android
           fastlane android build
 
