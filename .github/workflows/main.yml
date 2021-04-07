@@ -29,17 +29,10 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm install
-      - name: Make Gradlew Executable
-        run: cd android && chmod +x ./gradlew
-        # Build Command
-      - name: Build Android Release
+      - name: Install Fastlane
+        run:  gem install fastlane
+      - name: Build Apk
         run: |
-          cd android && ./gradlew assembleRelease
-      #Upload to Deploygate
-      - name: This action uploads an application file to DeployGate
-        uses: jmatsu/dg-upload-app-action@v0.2.1
-        with:
-          app_owner_name: hungpv19
-          api_token: 191bec14-af7b-4144-b60e-4a4ea7e93825
-          app_file_path: ./android/app/build/outputs/apk/release/app-release.apk
+          cd android
+          fastlane android build
 
