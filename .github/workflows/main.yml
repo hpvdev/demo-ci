@@ -1,8 +1,8 @@
-name: 'React Native Android Build APK'
+name: 'Keihiseisan Buid App'
 # Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
-  merge:
+  pull_request:
     branches: [master]
 
 jobs:
@@ -18,9 +18,21 @@ jobs:
       - name: Run tests
         run: |
           npm test
-  # Second Job
-  build-android:
+  # Eslint job
+  eslint:
     needs: install-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install npm dependencies
+        run: |
+          npm install
+      - name: Check eslint
+        run: |
+          npm run lint
+  # Android Job
+  build-android:
+    needs: eslint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
